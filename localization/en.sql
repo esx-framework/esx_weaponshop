@@ -10,10 +10,6 @@ CREATE TABLE `weashops` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
-INSERT INTO `licenses` (`type`, `label`) VALUES
-	('weapon', "Weapons license")
-;
-
 INSERT INTO `weashops` (`zone`, `item`, `price`) VALUES
 	('GunShop','WEAPON_PISTOL', 300),
 	('BlackWeashop','WEAPON_PISTOL', 500),
