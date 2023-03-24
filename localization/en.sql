@@ -9,8 +9,7 @@ CREATE TABLE `weashops` (
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-
-INSERT INTO `licenses` (`type`, `label`) VALUES
+INSERT IGNORE INTO `licenses` (`type`, `label`) VALUES
 	('weapon', "Weapons license")
 ;
 
