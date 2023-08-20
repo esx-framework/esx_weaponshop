@@ -12,6 +12,5 @@ Locales ['pl'] = {
   ['already_owned'] = 'you already own this weapon!',
   ['shop_menu_title'] = 'sklep',
   ['shop_menu_prompt'] = 'Wciśnij [E] aby otworzyć sklep.',
-  ['shop_menu_item'] = '%s PLN',
   ['map_blip'] = 'sklep z bronią',
 }
