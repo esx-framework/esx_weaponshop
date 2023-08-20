@@ -12,6 +12,5 @@ Locales ['fr'] = {
   ['already_owned'] = 'vous possédez déjà cette arme!',
   ['shop_menu_title'] = 'magasin',
   ['shop_menu_prompt'] = 'appuyez sur [E] pour accéder au magasin.',
-  ['shop_menu_item'] = '%s EUR',
   ['map_blip'] = 'armurerie',
 }

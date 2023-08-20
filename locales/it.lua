@@ -12,6 +12,5 @@ Locales ['it'] = {
     ['already_owned'] = 'Hai già quest\' arma!',
     ['shop_menu_title'] = 'Ammu-Nation',
     ['shop_menu_prompt'] = 'premere [E] per accedere al negozio',
-    ['shop_menu_item'] = '$%s',
     ['map_blip'] = 'Ammu-Nation',
   }
