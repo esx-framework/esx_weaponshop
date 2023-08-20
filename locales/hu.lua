@@ -12,6 +12,5 @@ Locales ['hu'] = {
   ['already_owned'] = 'Van már ilyened!',
   ['shop_menu_title'] = 'Fegyverbolt',
   ['shop_menu_prompt'] = 'Nyomj [E] hogy megnézd a kinálatot',
-  ['shop_menu_item'] = '%s$',
   ['map_blip'] = 'Fegyverbolt',
 }
