@@ -12,7 +12,6 @@ Locales ['fi'] = {
   ['already_owned'] = 'Sinulla on jo tämä ase!',
   ['shop_menu_title'] = 'Kauppa',
   ['shop_menu_prompt'] = 'Paina [E] avataksesi kauppa valikko.',
-  ['shop_menu_item'] = '%s EUR',
   ['map_blip'] = 'Asekauppa',
 }
 
