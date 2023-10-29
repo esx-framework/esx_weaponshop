@@ -1,13 +1,8 @@
-local HasAlreadyEnteredMarker = false
-local LastZone = nil
-local CurrentAction = nil
-local CurrentActionMsg = ''
-local CurrentActionData = {}
-local ShopOpen = false
+local shopOpen = false
 
 function OpenBuyLicenseMenu(zone)
-    ShopOpen = true
-    local Elements = {{
+    shopOpen = true
+    local elements = {{
         icon = "fa-regular fa-money-bill-alt",
         unselectable = true,
         title = TranslateCap("license_shop_title")
@@ -22,7 +17,7 @@ function OpenBuyLicenseMenu(zone)
 		value = "cancel"
     }}
 
-    ESX.OpenContext(Config.MenuPosition, Elements, function(menu, element)
+    ESX.OpenContext(Config.MenuPosition, elements, function(menu, element)
         if element.value == "buylicense" then
 			ESX.TriggerServerCallback('esx_weaponshop:buyLicense', function(bought)
                 if bought then
@@ -31,6 +26,7 @@ function OpenBuyLicenseMenu(zone)
             end)
 		end
 		if element.value == "cancel" then
+          shopOpen = false
           ESX.CloseContext()
 		end
     end)
@@ -39,8 +35,8 @@ end
 
 
 function OpenShopMenu(zone)
-    ShopOpen = true
-    local Elements = {{
+    shopOpen = true
+    local elements = {{
         icon = "fa-solid fa-bullseye",
         unselectable = true,
         description = TranslateCap("weapon_shop_menu_description"),
@@ -49,7 +45,7 @@ function OpenShopMenu(zone)
     for i = 1, #Config.Zones[zone].Items, 1 do
         local item = Config.Zones[zone].Items[i]
         item.label = ESX.GetWeaponLabel(item.name)
-        Elements[#Elements + 1] = {
+        elements[#elements + 1] = {
             icon = "fa-solid fa-gun",
             title = item.label,
             description = "Price: $".. ESX.Math.GroupDigits(item.price),
@@ -59,7 +55,7 @@ function OpenShopMenu(zone)
         }
     end
 
-    ESX.OpenContext(Config.MenuPosition, Elements, function(menu, element)
+    ESX.OpenContext(Config.MenuPosition, elements, function(menu, element)
 
         if element.value == "buy" then
             ESX.TriggerServerCallback('esx_weaponshop:buyWeapon', function(bought)
@@ -73,12 +69,7 @@ function OpenShopMenu(zone)
         end
 
     end, function(menu)
-        ShopOpen = false
-        CurrentAction = 'shop_menu'
-        CurrentActionMsg = TranslateCap('shop_menu_prompt')
-        CurrentActionData = {
-            zone = zone
-        }
+        shopOpen = false
     end)
 end
 
@@ -109,7 +100,7 @@ end
 
 AddEventHandler('onResourceStop', function(resource)
     if resource == GetCurrentResourceName() then
-        if ShopOpen then
+        if shopOpen then
             ESX.CloseContext()
         end
     end
@@ -137,7 +128,7 @@ CreateThread(function()
     end
 end)
 
-local TextShown = false
+local textShown = false
 local GetEntityCoords = GetEntityCoords
 local CreateThread = CreateThread
 local Wait = Wait
@@ -146,21 +137,19 @@ local IsControlJustReleased = IsControlJustReleased
 -- Display markers
 CreateThread(function()
     while true do
-        local Sleep = 1500
-        local InShop = false
-        local CurrentShop = nil
+        local sleep = 1500
+        local currentShop = nil
         local coords = GetEntityCoords(ESX.PlayerData.ped)
 
         for k, v in pairs(Config.Zones) do
             for i = 1, #v.Locations, 1 do
                 if (Config.Type ~= -1 and #(coords - v.Locations[i]) < Config.DrawDistance) then
-                    InShop = true
-                    CurrentShop = v.Locations[i]
-                    Sleep = 0
-                    if #(coords - CurrentShop) < 2.0 then
-                        if not TextShown then
+                    currentShop = v.Locations[i]
+                    sleep = 0
+                    if #(coords - currentShop) < 2.0 then
+                        if not textShown then
                             ESX.TextUI(TranslateCap('shop_menu_prompt'))
-                            TextShown = true
+                            textShown = true
                         end
                         if IsControlJustReleased(0, 38) then
                             if Config.LicenseEnable and v.Legal then
@@ -175,6 +164,8 @@ CreateThread(function()
                                 OpenShopMenu(k)
                             end
                         end
+                    else
+                        currentShop = nil
                     end
                 end
                 DrawMarker(Config.Type, v.Locations[i], 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.Size.x, Config.Size.y,
@@ -182,18 +173,18 @@ CreateThread(function()
                     false, false)
             end
         end
-        if not CurrentShop and TextShown then
-            TextShown = false
+
+        if (not currentShop or shopOpen) and textShown then
+            textShown = false
             ESX.HideUI()
         end
-        if not InShop and ShopOpen then
-            if ShopOpen then
-                TextShown = false
-                ESX.HideUI()
-                ESX.CloseContext()
-                ShopOpen = false
-            end
+
+        if not currentShop and shopOpen then
+            textShown = false
+            ESX.HideUI()
+            ESX.CloseContext()
+            shopOpen = false
         end
-        Wait(Sleep)
+        Wait(sleep)
     end
 end)
