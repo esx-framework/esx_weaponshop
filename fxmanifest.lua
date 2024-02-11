@@ -2,10 +2,9 @@ fx_version 'adamant'
 
 game 'gta5'
 
-description 'ESX Weapon Shop'
+description 'Adds a way for players to buy weapons'
 lua54 'yes'
 version '1.0'
-legacyversion '1.9.1'
 
 shared_scripts {
 	'@es_extended/imports.lua',
