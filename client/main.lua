@@ -1,5 +1,5 @@
 local shopOpen = false
-
+local nearbyZone = nil
 function OpenBuyLicenseMenu(zone)
     shopOpen = true
     local elements = {{
@@ -148,34 +148,21 @@ CreateThread(function()
                     sleep = 0
                     if #(coords - currentShop) < 2.0 then
                         if not textShown then
-                            ESX.TextUI(TranslateCap('shop_menu_prompt'))
+                            ESX.TextUI(TranslateCap('shop_menu_prompt', ESX.GetInteractKey()))
                             textShown = true
+                            nearbyZone = k
                         end
-                        if IsControlJustReleased(0, 38) then
-                            if Config.LicenseEnable and v.Legal then
-                                ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
-                                    if hasWeaponLicense then
-                                        OpenShopMenu(k)
-                                    else
-                                        OpenBuyLicenseMenu(k)
-                                    end
-                                end, GetPlayerServerId(PlayerId()), 'weapon')
-                            else
-                                OpenShopMenu(k)
-                            end
-                        end
-                    else
-                        currentShop = nil
                     end
-                end
-                DrawMarker(Config.Type, v.Locations[i], 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.Size.x, Config.Size.y,
+                    DrawMarker(Config.Type, v.Locations[i].x, v.Locations[i].y, v.Locations[i].z, 0.0, 0.0, 0.0, 0, 0.0, 0.0, Config.Size.x, Config.Size.y,
                     Config.Size.z, Config.Color.r, Config.Color.g, Config.Color.b, 100, false, true, 2, false, false,
                     false, false)
+                end
             end
         end
 
         if (not currentShop or shopOpen) and textShown then
             textShown = false
+            nearbyZone = nil
             ESX.HideUI()
         end
 
@@ -184,7 +171,26 @@ CreateThread(function()
             ESX.HideUI()
             ESX.CloseContext()
             shopOpen = false
+            nearbyZone = nil
         end
         Wait(sleep)
     end
+end)
+
+ESX.RegisterInteraction("open_weaponshop", function ()
+    local zone = Config.Zones[nearbyZone]
+
+    if Config.LicenseEnable and zone.Legal then
+        ESX.TriggerServerCallback('esx_license:checkLicense', function(hasWeaponLicense)
+            if hasWeaponLicense then
+                OpenShopMenu(nearbyZone)
+            else
+                OpenBuyLicenseMenu(nearbyZone)
+            end
+        end, ESX.serverId, 'weapon')
+    else
+        OpenShopMenu(nearbyZone)
+    end
+end, function()
+    return nearbyZone ~= nil and not shopOpen
 end)

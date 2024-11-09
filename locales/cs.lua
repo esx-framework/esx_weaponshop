@@ -11,6 +11,6 @@ Locales ['cs'] = {
   ['not_enough'] = 'nemas dostatek penez',
   ['already_owned'] = 'tuhle zbran jiz vlastnis!',
   ['shop_menu_title'] = 'ammu-Nation',
-  ['shop_menu_prompt'] = 'stiskni [E] pro pristup do Ammu-Nationu.',
+  ['shop_menu_prompt'] = 'stiskni [%s] pro pristup do Ammu-Nationu.',
   ['map_blip'] = 'ammu-Nation',
 }

@@ -11,6 +11,6 @@ Locales ['fr'] = {
   ['not_enough'] = 'vous n\'avez ~r~pas assez d\'argent',
   ['already_owned'] = 'vous possédez déjà cette arme!',
   ['shop_menu_title'] = 'magasin',
-  ['shop_menu_prompt'] = 'appuyez sur [E] pour accéder au magasin.',
+  ['shop_menu_prompt'] = 'appuyez sur [%s] pour accéder au magasin.',
   ['map_blip'] = 'armurerie',
 }

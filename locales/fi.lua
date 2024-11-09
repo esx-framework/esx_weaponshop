@@ -11,7 +11,7 @@ Locales ['fi'] = {
   ['not_enough'] = 'Ei tarpeeksi rahaa',
   ['already_owned'] = 'Sinulla on jo tämä ase!',
   ['shop_menu_title'] = 'Kauppa',
-  ['shop_menu_prompt'] = 'Paina [E] avataksesi kauppa valikko.',
+  ['shop_menu_prompt'] = 'Paina [%s] avataksesi kauppa valikko.',
   ['map_blip'] = 'Asekauppa',
 }
 

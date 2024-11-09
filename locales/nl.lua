@@ -11,6 +11,6 @@ Locales ['nl'] = {
   ['not_enough'] = 'je hebt niet genoeg geld',
   ['already_owned'] = 'je hebt dit wapen al!',
   ['shop_menu_title'] = 'Wapen winkel',
-  ['shop_menu_prompt'] = 'druk op [E] om de Wapen winkel te gebruiken.',
+  ['shop_menu_prompt'] = 'druk op [%s] om de Wapen winkel te gebruiken.',
   ['map_blip'] = 'Wapen winkel',
 }

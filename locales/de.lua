@@ -11,6 +11,6 @@ Locales ['de'] = {
   ['not_enough'] = 'Du hast nicht genug Geld!',
   ['already_owned'] = 'Du besitzt diese Waffe bereits!',
   ['shop_menu_title'] = 'Ammu-Nation',
-  ['shop_menu_prompt'] = 'Drücke [E] um auf den Ammu-Nation zuzugreifen.',
+  ['shop_menu_prompt'] = 'Drücke [%s] um auf den Ammu-Nation zuzugreifen.',
   ['map_blip'] = 'Ammu-Nation',
 }

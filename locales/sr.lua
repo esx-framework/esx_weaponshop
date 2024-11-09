@@ -11,6 +11,6 @@ Locales ['sr'] = {
   ['not_enough'] = 'Nemaš dovoljno novca',
   ['already_owned'] = 'Već poseduješ to oružje!',
   ['shop_menu_title'] = 'Oružarnica',
-  ['shop_menu_prompt'] = 'Pritisni [E] da pristupiš Oružarnici',
+  ['shop_menu_prompt'] = 'Pritisni [%s] da pristupiš Oružarnici',
   ['map_blip'] = 'Oruzarnica',
 }
